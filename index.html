@@ -3,40 +3,381 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iRemedy.ai — Pharmaceutical Supply Chain Intelligence</title>
-  <meta name="description" content="iRemedy.ai: First-of-its-kind pharmaceutical origin intelligence platform. Where is this drug actually made — and can we prove it?">
+  <title>TradeSpy.ai — Pharmaceutical Supply Chain Intelligence</title>
+  <meta name="description" content="TradeSpy.ai: First-of-its-kind pharmaceutical origin intelligence. Where is this drug actually made — and can we prove it?">
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    /* ── TRADESPY OVERRIDES & ADDITIONS ── */
+
+    /* Crosshair cursor on key elements */
+    .crosshair { cursor: crosshair; }
+
+    /* Wordmark */
+    .ts-wordmark {
+      display: inline-flex; align-items: center; gap: 0;
+      font-family: var(--mono); font-weight: 600; letter-spacing: -0.02em;
+    }
+    .ts-wordmark .ts-trade { color: var(--ink); }
+    .ts-wordmark .ts-spy {
+      color: var(--red);
+      position: relative;
+      display: inline-block;
+    }
+    .ts-wordmark .ts-spy::before {
+      content: '';
+      position: absolute;
+      left: -2px; right: -2px;
+      top: 48%; height: 2px;
+      background: var(--red);
+      opacity: 0.35;
+    }
+    .ts-wordmark .ts-dot { color: var(--ink-3); }
+    .ts-wordmark .ts-ai { color: var(--ink-3); font-weight: 400; }
+
+    /* Crosshair logo mark */
+    .ts-crosshair {
+      display: inline-block;
+      width: 1em; height: 1em;
+      position: relative;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+    .ts-crosshair svg { width: 100%; height: 100%; }
+
+    /* Redaction bars — hover to reveal */
+    .redacted {
+      position: relative;
+      display: inline-block;
+      background: var(--ink);
+      color: transparent;
+      padding: 0 4px;
+      cursor: crosshair;
+      transition: all 0.3s;
+      user-select: none;
+    }
+    .redacted:hover {
+      background: transparent;
+      color: var(--red);
+    }
+
+    /* Classified stamp variants */
+    .stamp-ts {
+      display: inline-block;
+      font-family: var(--mono); font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border: 2px solid var(--red);
+      color: var(--red);
+      transform: rotate(-2deg);
+      opacity: 0.85;
+    }
+    .stamp-ts.green { border-color: #2a7a2a; color: #2a7a2a; transform: rotate(1.5deg); }
+    .stamp-ts.blue { border-color: var(--cyan); color: var(--cyan); transform: rotate(-1deg); }
+
+    /* Spy vs Spy duality bar */
+    .duality-bar {
+      display: flex; height: 4px; width: 100%;
+      background: linear-gradient(to right, var(--ink) 50%, var(--red) 50%);
+      margin: 0.5rem 0;
+    }
+
+    /* Ticker tape classified feed */
+    .classified-ticker {
+      background: var(--ink);
+      color: var(--red);
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.5rem 0;
+      overflow: hidden;
+      position: relative;
+      border-top: 1px solid var(--red);
+      border-bottom: 1px solid var(--red);
+    }
+    .ticker-inner {
+      display: inline-block;
+      white-space: nowrap;
+      animation: ticker 28s linear infinite;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Agent grid easter egg */
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .agent-dot {
+      height: 6px; background: var(--red);
+      opacity: 0.3;
+      transition: opacity 0.2s, background 0.2s;
+      cursor: crosshair;
+    }
+    .agent-dot:hover { opacity: 1; background: var(--cyan); }
+    .agent-dot.active { opacity: 1; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* Scanline effect on hover for key elements */
+    .scanline-hover {
+      position: relative; overflow: hidden;
+    }
+    .scanline-hover::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+      pointer-events: none; opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .scanline-hover:hover::after { opacity: 1; }
+
+    /* Masthead meta override */
+    #masthead { position: relative; overflow: hidden; }
+
+    /* Corner crosshairs on masthead */
+    #masthead::before, #masthead::after {
+      content: '';
+      position: absolute;
+      width: 20px; height: 20px;
+      border-color: var(--red);
+      border-style: solid;
+      opacity: 0.4;
+    }
+    #masthead::before { top: 1rem; left: 1rem; border-width: 2px 0 0 2px; }
+    #masthead::after { bottom: 1rem; right: 1rem; border-width: 0 2px 2px 0; }
+
+    /* Blink cursor easter egg */
+    .blink { animation: blink 1.2s step-end infinite; }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* ── TYPEWRITER ── */
+    .typewriter-wrap { display: inline; }
+    .typewriter-cursor { display: inline-block; width: 3px; background: var(--red); animation: blink 0.8s step-end infinite; vertical-align: baseline; margin-left: 2px; height: 0.85em; }
+
+    /* ── GLITCH ── */
+    @keyframes glitch-r { 0%,100% { clip-path: none; transform: none; opacity: 1; } 92% { clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%); transform: translateX(-3px); opacity: 0.9; color: var(--red); } 94% { clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); transform: translateX(3px); color: var(--cyan); } 96% { clip-path: none; transform: none; opacity: 1; } }
+    .glitch-text { position: relative; display: inline-block; }
+    .glitch-text.glitching { animation: glitch-r 0.15s steps(1) forwards; }
+
+    /* ── CROSSHAIR CURSOR TRAIL ── */
+    #cursor-trail {
+      position: fixed; pointer-events: none; z-index: 9998;
+      width: 24px; height: 24px; transform: translate(-50%, -50%);
+      transition: left 0.06s linear, top 0.06s linear;
+    }
+    #cursor-trail svg { width: 100%; height: 100%; opacity: 0.35; }
+
+    /* ── CUSTOM CONTEXT MENU ── */
+    #ctx-menu {
+      position: fixed; z-index: 9997; display: none;
+      background: var(--ink); border: 1px solid var(--red);
+      font-family: var(--mono); font-size: 0.65rem; color: var(--red);
+      letter-spacing: 0.1em; padding: 0.75rem 1.25rem;
+      pointer-events: none; white-space: nowrap;
+    }
+    #ctx-menu::before { content: '// '; }
+
+    /* ── SURVEILLANCE OVERLAY ── */
+    #surveillance-overlay {
+      position: fixed; inset: 0; z-index: 9990;
+      display: none; align-items: center; justify-content: center;
+      pointer-events: none;
+      background: rgba(10,5,3,0.7);
+    }
+    #surveillance-overlay.show { display: flex; }
+    .surv-inner {
+      font-family: var(--mono); color: var(--red);
+      text-align: center; letter-spacing: 0.2em;
+      animation: survPulse 2s ease infinite;
+    }
+    .surv-inner .surv-big { font-size: clamp(2rem, 5vw, 4rem); font-weight: 600; }
+    .surv-inner .surv-sub { font-size: 0.7rem; color: rgba(200,22,10,0.5); margin-top: 0.5rem; }
+    @keyframes survPulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+    /* ── COPY TOAST ── */
+    #copy-toast {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 9996;
+      background: var(--ink); border: 1px solid var(--red);
+      font-family: var(--mono); font-size: 0.62rem; color: var(--red);
+      letter-spacing: 0.12em; padding: 0.6rem 1rem;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+    }
+    #copy-toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ── AGENT TERMINAL ── */
+    #agent-terminal {
+      position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 200;
+      width: 340px; background: rgba(10,5,3,0.92);
+      border: 1px solid rgba(200,22,10,0.3);
+      font-family: var(--mono); font-size: 0.58rem;
+      color: rgba(200,22,10,0.7); letter-spacing: 0.05em;
+      display: none;
+    }
+    .terminal-header {
+      background: rgba(200,22,10,0.1); border-bottom: 1px solid rgba(200,22,10,0.2);
+      padding: 0.4rem 0.75rem; display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer;
+    }
+    .terminal-header span { color: var(--red); font-weight: 600; }
+    .terminal-body { height: 140px; overflow: hidden; padding: 0.5rem 0.75rem; position: relative; }
+    .terminal-log { display: flex; flex-direction: column; gap: 0.2rem; }
+    .terminal-line { white-space: nowrap; overflow: hidden; opacity: 0.85; }
+    .terminal-line.new { color: rgba(0, 200, 100, 0.8); }
+    #terminal-toggle {
+      position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 201;
+      background: var(--ink); border: 1px solid rgba(200,22,10,0.4);
+      color: var(--red); font-family: var(--mono); font-size: 0.55rem;
+      letter-spacing: 0.15em; padding: 0.4rem 0.8rem; cursor: pointer;
+      transition: border-color 0.3s;
+    }
+    #terminal-toggle:hover { border-color: var(--red); }
+
+    /* ── THREAT LEVEL ── */
+    .threat-level-val { transition: color 0.5s; }
+    .threat-high { color: #ff4444 !important; }
+    .threat-elevated { color: #ff8800 !important; }
+    .threat-critical { color: #ff0000 !important; animation: blink 0.5s step-end infinite; }
+
+    /* Override headline for TradeSpy */
+    .headline-main { font-size: clamp(3rem, 8vw, 6rem); }
+
+    /* Case file watermark */
+    .case-watermark {
+      position: absolute; right: 2rem; top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-family: var(--mono); font-size: 0.55rem;
+      letter-spacing: 0.4em; color: var(--ink-3);
+      opacity: 0.25; white-space: nowrap;
+      user-select: none; pointer-events: none;
+    }
+
+    /* Intelligence bar */
+    .intel-bar {
+      background: var(--ink);
+      color: rgba(255,255,255,0.85);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      padding: 0.75rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 2rem; flex-wrap: wrap;
+      border-top: 1px solid var(--red);
+    }
+    .intel-bar span { letter-spacing: 0.12em; }
+    .intel-bar .live { color: var(--red); }
+    .intel-bar .live::before { content: '● '; animation: pulse 1.5s infinite; }
+
+    /* Override cap-row for TradeSpy */
+    .cap-row-num { color: var(--red); }
+
+    /* Spy file tabs on capability section */
+    .spy-file-header {
+      display: flex; align-items: flex-end; gap: 0;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 0;
+    }
+    .spy-tab {
+      font-family: var(--mono); font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+      background: var(--paper-3);
+      border: 1px solid var(--rule-heavy);
+      border-bottom: none;
+      color: var(--ink-3);
+      cursor: pointer; margin-right: 0.25rem;
+      transition: all 0.2s;
+    }
+    .spy-tab.active { background: var(--ink); color: var(--red); border-color: var(--ink); }
+
+    /* Hover tooltip easter eggs */
+    [data-tooltip] { position: relative; cursor: crosshair; }
+    [data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute; bottom: 100%; left: 0;
+      background: var(--ink); color: var(--red);
+      font-family: var(--mono); font-size: 0.55rem;
+      padding: 0.3rem 0.6rem; white-space: nowrap;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s; z-index: 10;
+      letter-spacing: 0.1em; border: 1px solid var(--red);
+    }
+    [data-tooltip]:hover::after { opacity: 1; }
+  </style>
 </head>
 <body>
 
+  <!-- CLASSIFIED TICKER -->
+  <div class="classified-ticker">
+    <div class="ticker-inner">
+      ◆ TRADESPY.AI — ACTIVE SURVEILLANCE ◆ 29,000+ NDCs UNDER CONTINUOUS MONITORING ◆ 31 AUTONOMOUS AGENTS OPERATIONAL ◆ CCP HARD FLOOR: ENFORCED IN CODE, NOT POLICY ◆ LAST SWEEP: <span id="ticker-time"></span> ◆ AGENT STATUS: ALL SYSTEMS NOMINAL ◆ CASE FILE: TS-2026-001 — ACTIVE ◆ THREAT LEVEL: ELEVATED ◆ READING THIS? YOU'RE ALREADY A TARGET. ◆ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◆ TRADESPY.AI — ACTIVE SURVEILLANCE ◆ 29,000+ NDCs UNDER CONTINUOUS MONITORING ◆ 31 AUTONOMOUS AGENTS OPERATIONAL ◆ CCP HARD FLOOR: ENFORCED IN CODE, NOT POLICY ◆ LAST SWEEP: <span></span> ◆ AGENT STATUS: ALL SYSTEMS NOMINAL ◆ CASE FILE: TS-2026-001 — ACTIVE ◆ THREAT LEVEL: ELEVATED ◆ READING THIS? YOU'RE ALREADY A TARGET. ◆
+    </div>
+  </div>
+
   <!-- ── MASTHEAD ── -->
-  <header id="masthead">
+  <header id="masthead" class="scanline-hover">
     <div class="masthead-top">
       <div class="masthead-meta">
-        CASE FILE NO. AI-2026-001<br>
-        CLASSIFICATION: NATIONAL SECURITY INTELLIGENCE<br>
+        CASE FILE NO. TS-2026-001<br>
+        CLASSIFICATION: <span class="redacted" data-redacted="TOP SECRET">TOP SECRET</span><br>
         JURISDICTION: UNITED STATES
       </div>
       <div class="masthead-center">
-        <img src="assets/iRemedy_Logo_wo_Slogan.png" alt="iRemedy Healthcare Companies">
-        <div class="masthead-tagline">iRemedy.ai — Pharmaceutical Supply Chain Intelligence</div>
+        <div style="display:flex; align-items:center; justify-content:center; gap:0.75rem; margin-bottom:0.5rem;">
+          <!-- Crosshair SVG -->
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.85">
+            <circle cx="20" cy="20" r="10" stroke="#c8160a" stroke-width="1.5" fill="none"/>
+            <circle cx="20" cy="20" r="3" fill="#c8160a" opacity="0.6"/>
+            <line x1="20" y1="0" x2="20" y2="8" stroke="#c8160a" stroke-width="1.5"/>
+            <line x1="20" y1="32" x2="20" y2="40" stroke="#c8160a" stroke-width="1.5"/>
+            <line x1="0" y1="20" x2="8" y2="20" stroke="#c8160a" stroke-width="1.5"/>
+            <line x1="32" y1="20" x2="40" y2="20" stroke="#c8160a" stroke-width="1.5"/>
+            <circle cx="20" cy="20" r="17" stroke="#c8160a" stroke-width="0.5" stroke-dasharray="3 3" fill="none" opacity="0.4"/>
+          </svg>
+          <div style="font-family:var(--mono); font-size:1.6rem; font-weight:600; letter-spacing:-0.02em; line-height:1;">
+            <span style="color:var(--ink)">Trade</span><span style="color:var(--red); position:relative;">Spy<span style="position:absolute; left:0; right:0; top:50%; height:1.5px; background:var(--red); opacity:0.3; transform:translateY(-50%);"></span></span><span style="color:var(--ink-3)">.ai</span>
+          </div>
+        </div>
+        <div class="masthead-tagline">Pharmaceutical Supply Chain Intelligence</div>
       </div>
       <div class="masthead-right">
         <div class="mono-sm">
           PLATFORM v2.0<br>
-          STUART, FLORIDA<br>
-          IREMEDY.AI
+          <span class="redacted" data-redacted="STUART, FLORIDA">STUART, FLORIDA</span><br>
+          TRADESPY.AI
         </div>
       </div>
     </div>
+
+    <!-- Duality bar — Spy vs Spy -->
+    <div class="duality-bar"></div>
+
     <div class="masthead-headline">
-      <div class="headline-kicker">⬛ EXHIBIT A — THE QUESTION GOVERNMENT PROCUREMENT HAS NEVER BEEN ABLE TO ANSWER</div>
-      <h1 class="headline-main">Where Is This<br>Drug Made —<br>And Can We Prove It?</h1>
-      <p class="headline-deck">A product labeled Made in France may carry 33% China API dependency. A product labeled Made in New York may be manufactured in Wuhan. The label lies. iRemedy.ai doesn't.</p>
+      <div class="headline-kicker">⬛ CASE FILE TS-2026-001 — THE QUESTION GOVERNMENT PROCUREMENT HAS NEVER ANSWERED</div>
+      <h1 class="headline-main" id="typewriter-headline"><span id="typewriter-text"></span><span class="typewriter-cursor" id="tw-cursor"></span></h1>
+      <p class="headline-deck">A product labeled Made in France may carry 33% China API dependency. A product labeled Made in New York may be manufactured in Wuhan. The label lies. TradeSpy.ai doesn't.</p>
     </div>
+
+    <div class="case-watermark">TRADESPY.AI // TS-2026-001 // ACTIVE SURVEILLANCE // CLASSIFIED</div>
   </header>
+
+  <!-- INTEL STATUS BAR -->
+  <div class="intel-bar">
+    <span class="live">AGENTS ACTIVE</span>
+    <span>29,000+ NDCs MONITORED</span>
+    <span>31 AUTONOMOUS AGENTS</span>
+    <span>13+ DATA SOURCES</span>
+    <span>54 RISK FACTORS</span>
+    <span>NEWS REFRESH: <strong style="color:var(--red)">4HR</strong></span>
+    <span style="color:rgba(255,255,255,0.4)">CASE FILE TS-2026-001<span class="blink">_</span></span>
+    <span>THREAT: <strong class="threat-level-val" id="threat-level">ELEVATED</strong></span>
+  </div>
 
   <!-- ── BROADSHEET BODY ── -->
   <main class="broadsheet">
@@ -45,51 +386,58 @@
     <section id="lead">
       <div class="lead-main">
         <div class="evidence-tag">
-          <span>◈</span> EXHIBIT A-1 — THE ORIGIN PROBLEM
+          <span>◈</span> FILE TS-A1 — ORIGIN PROBLEM
         </div>
-        <p class="lead-dropcap">iRemedy.ai is a first-of-its-kind Pharmaceutical Origin Intelligence Platform built to answer the question government procurement has never been able to answer with certainty: where is this drug actually made — and can we prove it?</p>
-        <p>The platform combines FDA regulatory records, SEC filings, EPA environmental data, UN Comtrade trade statistics, political donation disclosures, and 31 autonomous AI agents to produce a verified, auditable intelligence profile for every drug product in the U.S. market.</p>
+        <p class="lead-dropcap">TradeSpy.ai is a first-of-its-kind Pharmaceutical Origin Intelligence Platform built to answer the question government procurement has never answered with certainty: where is this drug actually made — and can we prove it?</p>
+        <p>The platform combines FDA regulatory records, SEC filings, EPA environmental data, UN Comtrade trade statistics, <span class="redacted" data-redacted="political donation disclosures">political donation disclosures</span>, and 31 autonomous AI agents to produce a verified, auditable intelligence profile for every drug product in the U.S. market.</p>
         <div class="pullquote">
           <p>"It screens every Chinese-nexus manufacturer for CCP and state-owned enterprise connections, reveals hidden API dependency behind Western-labeled products, and delivers real-time shortage early warning — all surfaced through a natural language interface that requires no technical expertise to operate."</p>
         </div>
-        <p>The CCP hard floor is enforced in code — not in an AI prompt. No quality certification, no domestic manufacturing bonus, no human override can pull a flagged product below HIGH risk. That is not policy. That is architecture.</p>
-        <p>This is not a research project. It is a production intelligence platform built by the operators who lived the supply chain crisis firsthand. What follows is the evidence.</p>
-        <div style="margin-top:2rem">
-          <span class="stamp approved">29,000+ NDCs TRACKED</span>
-          &nbsp;&nbsp;
-          <span class="stamp">31 AUTONOMOUS AGENTS</span>
+        <p>The <span data-tooltip="// enforced in python, not in prompt">CCP hard floor is enforced in code</span> — not in an AI prompt. No quality certification, no domestic manufacturing bonus, no human override can pull a flagged product below HIGH risk. That is not policy. That is architecture.</p>
+        <p>This is a production intelligence platform built by the operators who lived the supply chain crisis firsthand. What follows is the case file.</p>
+        <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+          <span class="stamp-ts">29,000+ NDCs</span>
+          <span class="stamp-ts green">Agents: Active</span>
+          <span class="stamp-ts blue">31 Agents</span>
         </div>
       </div>
 
       <div class="lead-side-1">
-        <div class="side-head">PLATFORM SCALE</div>
-        <div class="stat-box">
+        <div class="side-head">SURVEILLANCE METRICS</div>
+        <div class="stat-box" data-tooltip="// refreshed every 4 hours">
           <div class="stat-box-num">29,000+</div>
-          <div class="stat-box-label">NDCs tracked with real-time origin intelligence</div>
+          <div class="stat-box-label">NDCs under continuous origin surveillance</div>
         </div>
-        <div class="stat-box">
+        <div class="stat-box" data-tooltip="// 6 scoring + 25 stewards">
           <div class="stat-box-num">31</div>
-          <div class="stat-box-label">Autonomous AI agents — continuous, zero manual updates</div>
+          <div class="stat-box-label">Autonomous AI agents — zero manual updates</div>
         </div>
         <div class="stat-box">
           <div class="stat-box-num">13+</div>
-          <div class="stat-box-label">Federal and commercial data sources</div>
+          <div class="stat-box-label">Federal and commercial intelligence sources</div>
         </div>
-        <div class="stat-box">
+        <div class="stat-box" data-tooltip="// 44 enabled, 10 documented as non-determinative">
           <div class="stat-box-num">54</div>
-          <div class="stat-box-label">Risk scoring factors (44 enabled, 10 documented as non-determinative)</div>
+          <div class="stat-box-label">Risk scoring factors per product</div>
+        </div>
+
+        <!-- Agent activity easter egg -->
+        <div style="margin-top:1.5rem">
+          <div class="mono-sm" style="color:var(--ink-3); margin-bottom:0.5rem;">// AGENT PULSE — 31 ACTIVE</div>
+          <div class="agent-grid" id="agent-grid"></div>
         </div>
       </div>
 
       <div class="lead-side-2">
-        <div class="side-head">WHY THE LABEL IS NOT ENOUGH</div>
+        <div class="side-head">THE LABEL DECEPTION</div>
         <div class="side-body">
-          <p>FDA labeler records identify the U.S. marketing entity that filed the application — not the facility where the drug was manufactured. <strong>"Manufactured For" shell arrangements, U.S. HQ conflation, and CMO cascading</strong> have made it structurally impossible to trace origin from label alone.</p>
-          <p>Over 80% of U.S. drug Active Pharmaceutical Ingredients are sourced overseas. The FDA inspected 28% of Chinese pharmaceutical facilities in FY2024. For the remaining 72%, procurement officers are buying drugs from facilities they cannot identify — because the label points to a U.S. subsidiary, not the factory.</p>
-          <p>iRemedy.ai closes that gap. Every determination. Every NDC. Full evidence trail.</p>
+          <p>FDA labeler records identify the U.S. marketing entity that filed the application — <strong>not the facility where the drug was manufactured.</strong></p>
+          <p style="margin-top:0.75rem">"Manufactured For" shell arrangements, U.S. HQ conflation, and CMO cascading have made it structurally impossible to trace origin from label alone.</p>
+          <p style="margin-top:0.75rem">Over 80% of U.S. drug APIs are sourced overseas. The FDA inspected <span class="redacted" data-redacted="28%">28%</span> of Chinese pharmaceutical facilities in FY2024. For the remaining <span data-tooltip="// unverified. uninspected. in your formulary.">72%</span>, procurement officers are buying from facilities they cannot identify — because the label points to a U.S. subsidiary, not the factory.</p>
+          <p style="margin-top:0.75rem">TradeSpy.ai closes that gap. Every determination. Every NDC. Full evidence trail.</p>
         </div>
         <div style="margin-top:1.5rem">
-          <span class="stamp classified">EVIDENCE-BACKED · FIELD-LEVEL PROVENANCE</span>
+          <span class="stamp-ts" style="font-size:0.5rem">FIELD-LEVEL PROVENANCE</span>
         </div>
       </div>
     </section>
@@ -99,30 +447,30 @@
     <!-- ── THREE COLUMN EVIDENCE ── -->
     <section id="evidence">
       <div class="evidence-col">
-        <div class="evidence-tag">◈ THE LABEL LIES</div>
-        <h3 class="col-head">iRemedy.ai Doesn't</h3>
+        <div class="evidence-tag">◈ FIELD REPORT: THE LABEL</div>
+        <h3 class="col-head">The Label Lies.<br>TradeSpy.ai Doesn't.</h3>
         <div class="col-body">
-          <p>A product labeled Made in France may carry 33% China API dependency. A product with a New York headquarters and FDA-registered U.S. labeler may have its active pharmaceutical ingredient manufactured in Wuhan. Neither fact appears on the label.</p>
-          <p>iRemedy.ai is the only platform that reveals upstream ingredient exposure using real, verifiable UN Comtrade trade data — not inference, not sampling, not self-reported attestation. Actual trade flows. Actual countries. Actual percentages.</p>
-          <p>Every determination carries its evidence: the source, the timestamp, the confidence tier, and the specific factor that drove the conclusion. The audit trail is the product.</p>
+          <p>A product labeled Made in France may carry 33% China API dependency. A product with a New York headquarters may have its active pharmaceutical ingredient manufactured in Wuhan. Neither fact appears on the label.</p>
+          <p>TradeSpy.ai is the only platform that reveals upstream ingredient exposure using real, verifiable UN Comtrade trade data — not inference, not sampling, not self-reported attestation. Actual trade flows. Actual countries. Actual percentages.</p>
+          <p>Every determination carries its evidence: the source, the timestamp, the confidence tier, and the specific factor that drove the conclusion. <span data-tooltip="// the audit trail IS the product">The audit trail is the product.</span></p>
         </div>
       </div>
       <div class="evidence-col">
-        <div class="evidence-tag">◈ THE CCP FLOOR IS CODE</div>
-        <h3 class="col-head">Not Policy. Not Advisory. Deterministic.</h3>
+        <div class="evidence-tag">◈ FIELD REPORT: CCP FLOOR</div>
+        <h3 class="col-head">Code.<br>Not Policy.<br>Not Advisory.</h3>
         <div class="col-body">
-          <p>Competitor platforms flag CCP risk as advisory — a warning that can be overridden by a quality certification, a domestic manufacturing bonus, or a human reviewer. In iRemedy.ai, that is not how it works.</p>
-          <p>The CCP hard floor is enforced deterministically in Python. It screens every Chinese-nexus manufacturer across 13 sources: OFAC sanctions, entity lists, state-ownership records, SOE registries, PLA affiliation, and political membership records. If a manufacturer is flagged, the product scores HIGH — no AI prompt, no certification, no override can change that.</p>
-          <p>That is not a feature. That is an architectural commitment to procurement integrity.</p>
+          <p>Competitor platforms flag CCP risk as advisory — a warning that can be overridden by a quality certification, a domestic manufacturing bonus, or a human reviewer. In TradeSpy.ai, that is not how it works.</p>
+          <p>The CCP hard floor is enforced deterministically in Python. It screens every Chinese-nexus manufacturer across 13 sources: <span class="redacted" data-redacted="OFAC · Entity Lists · SOE Registries · PLA Affiliation · Political Membership">OFAC · Entity Lists · SOE Registries · PLA Affiliation · Political Membership</span>. If a manufacturer is flagged, the product scores HIGH.</p>
+          <p>No AI prompt. No certification. No override. No exception. That is an architectural commitment to procurement integrity.</p>
         </div>
       </div>
       <div class="evidence-col">
-        <div class="evidence-tag">◈ BUILT BY INSIDERS</div>
-        <h3 class="col-head">Not Analysis. Operational Experience.</h3>
+        <div class="evidence-tag">◈ FIELD REPORT: PROVENANCE</div>
+        <h3 class="col-head">Built by the<br>Operators Who<br>Lived It.</h3>
         <div class="col-body">
-          <p>iRemedy is a 50-state licensed, NABP-accredited pharmaceutical wholesale distributor with 18 years of operations inside the supply chain it mapped. During Operation Warp Speed, iRemedy delivered 1.1 billion needle and syringe units under DoD contract — one in every two COVID vaccine doses was administered using iRemedy product.</p>
-          <p>The data gaps iRemedy.ai closes were not discovered through academic analysis. They were discovered by executing real transactions in a broken system, testifying before the U.S. Senate Special Committee on Aging, and briefing the White House Made in America Office on foreign API dependency and national security risk.</p>
-          <p>The platform is the product of that experience. That is why nothing else compares.</p>
+          <p>TradeSpy.ai is built on 18 years of operations inside the supply chain it maps. During Operation Warp Speed, the founding team delivered 1.1 billion needle and syringe units under DoD contract — one in every two COVID vaccine doses was administered using this infrastructure.</p>
+          <p>The data gaps TradeSpy.ai closes were not discovered through academic analysis. They were discovered by executing real transactions in a broken system, testifying before the U.S. Senate, and briefing the White House on foreign API dependency.</p>
+          <p>The platform is the product of that experience. <span data-tooltip="// that is why nothing else compares">That is why nothing else compares.</span></p>
         </div>
       </div>
     </section>
@@ -133,30 +481,30 @@
     <section id="capabilities-sheet">
       <div class="cap-sheet-head">
         <div>
-          <div class="cap-kicker">EXHIBIT B — CORE INTELLIGENCE CAPABILITIES</div>
+          <div class="cap-kicker">EXHIBIT B — INTELLIGENCE CAPABILITIES // <span style="color:var(--red)">3 ACTIVE LAYERS</span></div>
           <h2>Three Intelligence<br>Layers</h2>
         </div>
         <div class="mono-sm" style="color:var(--ink-3);max-width:320px;line-height:1.8">
-          Every capability operates on the same evidence engine. Every data point carries a source, a timestamp, and a confidence level. Nothing is self-reported without verification. Everything is auditable at the field level.
+          Every capability operates on the same evidence engine. Every data point carries a source, a timestamp, and a confidence level. Nothing is self-reported without verification. Everything is <span data-tooltip="// field-level. click any data point.">auditable at the field level</span>.
         </div>
       </div>
       <div class="cap-rows">
 
-        <div class="cap-row">
+        <div class="cap-row scanline-hover">
           <div class="cap-row-num">01</div>
           <div class="cap-row-name">Origin Intelligence</div>
           <div class="cap-row-desc">Made-in-America (MIA) Score — 0–100% composite per NDC from 44 independent evidence factors across 13+ databases. BAA/TAA compliance flags, instant procurement eligibility. Country of Origin verification that resolves "Manufactured For" shell arrangements, U.S. HQ conflation, and CMO cascading. Self-attestation system for manufacturer-verified domestic claims. RxNorm-based domestic therapeutic alternatives for every high-risk product.</div>
           <div class="cap-row-tag">ORIGIN · BAA/TAA</div>
         </div>
 
-        <div class="cap-row">
+        <div class="cap-row scanline-hover">
           <div class="cap-row-num">02</div>
           <div class="cap-row-name">Threat Screening</div>
-          <div class="cap-row-desc">CCP Screening Agent across 13 sources: OFAC, entity lists, SOE registries, PLA affiliation, political membership. CCP hard floor enforced in Python — not advisory, not overridable. NDC Risk Scorer (0–100) with geopolitical exposure, API provenance, regulatory history, and news multiplier refreshed every 4 hours. API Dependency Intelligence via UN Comtrade — reveals hidden China/India ingredient exposure behind Western-labeled products. Political Nexus Analysis mapping FEC donations, PAC contributions, lobbying disclosures, and politician stock holdings to specific manufacturers.</div>
+          <div class="cap-row-desc">CCP Screening Agent across 13 sources: <span class="redacted" data-redacted="OFAC, entity lists, SOE registries, PLA affiliation, political membership">OFAC, entity lists, SOE registries, PLA affiliation, political membership</span>. CCP hard floor enforced in Python — not advisory, not overridable. NDC Risk Scorer (0–100) with geopolitical exposure, API provenance, regulatory history, and news multiplier refreshed every 4 hours. API Dependency Intelligence via UN Comtrade — reveals hidden China/India ingredient exposure behind Western-labeled products. Political Nexus Analysis mapping <span class="redacted" data-redacted="FEC donations, PAC contributions, lobbying disclosures, and politician stock holdings">FEC donations, PAC contributions, lobbying disclosures, and politician stock holdings</span> to specific manufacturers.</div>
           <div class="cap-row-tag">CCP · THREAT · NEXUS</div>
         </div>
 
-        <div class="cap-row">
+        <div class="cap-row scanline-hover">
           <div class="cap-row-num">03</div>
           <div class="cap-row-name">Operational Intelligence</div>
           <div class="cap-row-desc">Shortage Early Warning with 30/60/90-day predictive risk radar and cause analysis feed. Natural Language Query — plain English questions return formatted intelligence briefings in seconds; designed for contracting officers, not data scientists. Executive Briefing Generator with four audience templates including Congressional staff and C-suite, PDF export. Geopolitical Intelligence Center with China dependency deep dives, therapeutic vulnerability analysis, and legislation tracker. iRemedy American Risk Index (IARI) — composite national risk score across MIA, shortage impact, COO confidence, and recall severity.</div>
@@ -172,39 +520,51 @@
     <section id="diagram">
       <div class="diagram-left">
         <div>
-          <div class="evidence-tag">◈ EXHIBIT C — THE ENGINE</div>
+          <div class="evidence-tag">◈ EXHIBIT C — THE ENGINE // <span style="color:var(--cyan)">CLASSIFIED</span></div>
           <h2>31 Agents.<br>Zero Manual Updates.<br>Continuous Operation.</h2>
           <p>31 autonomous AI agents run around the clock — 25 data steward agents collecting evidence from federal and commercial databases, 6 scoring agents applying the 44-factor model, an independent Reconciler validating every conclusion, and a Data Inspector flagging discrepancies, stale data, and scoring improvements.</p>
-          <p style="margin-top:1rem">Every competitor relies on periodic manual data refreshes. iRemedy.ai's agents continuously collect, score, and reconcile — with news risk signals updating every 4 hours. The system gets more accurate over time. That is the design.</p>
+          <p style="margin-top:1rem">Every competitor relies on periodic manual data refreshes. TradeSpy.ai's agents continuously collect, score, and reconcile — with news risk signals updating every 4 hours. <span data-tooltip="// it compounds. that is the design.">The system gets more accurate over time.</span></p>
         </div>
         <div style="margin-top:2rem">
           <div class="side-head">WHY NOTHING ELSE COMPARES</div>
           <div class="side-body">
-            <p><strong>31 agents vs. quarterly updates.</strong> Continuous vs. periodic. Evidence-backed vs. self-reported. CCP floor in code vs. advisory flag. Political exposure visible vs. invisible. Natural language vs. SQL. Ask it anything — get an intelligence briefing in seconds.</p>
+            <p><strong>31 agents vs. quarterly updates.</strong> Continuous vs. periodic. Evidence-backed vs. self-reported. CCP floor in code vs. advisory flag. Political exposure visible vs. invisible. Natural language vs. SQL.</p>
+            <p style="margin-top:0.75rem">Ask it anything — <span data-tooltip="// seconds, not days">"List all products from CCP-flagged manufacturers in the cardiovascular formulary"</span> — and get an intelligence briefing in seconds.</p>
+          </div>
+          <div style="margin-top:1.5rem">
+            <div class="side-head">PATENT RECORD</div>
+            <div class="side-body" style="font-family:var(--mono);font-size:0.62rem;line-height:2.2;color:var(--ink-3)">
+              US 11,983,236 · Failure detection & recovery<br>
+              US 11,860,967 · Descriptor normalization<br>
+              US 12,332,966 · Task decomposition<br>
+              US 12,468,774 · Data reacquisition<br>
+              US 11,640,440 · Structure identification<br>
+              US 11,416,575 · Complex task execution
+            </div>
           </div>
         </div>
       </div>
       <div class="diagram-right">
         <div class="arch-diagram">
           <div class="arch-row">
-            <div class="arch-box"><div class="arch-label">25 DATA STEWARD AGENTS</div><div class="arch-sub">FDA · SEC · EPA · WHO · EMA · FEC · Comtrade · DailyMed · RxNorm · PharmaCompass · CCP · Lobbying · Politician Holdings</div></div>
+            <div class="arch-box"><div class="arch-label">25 DATA STEWARD AGENTS</div><div class="arch-sub">FDA · SEC · EPA · WHO · EMA · FEC · Comtrade · DailyMed · RxNorm · <span class="redacted" data-redacted="PharmaCompass · CCP · Lobbying · Politician Holdings">PharmaCompass · CCP · Lobbying · Politician Holdings</span></div></div>
             <div class="arch-arrow">→</div>
-            <div class="arch-box highlight"><div class="arch-label">EVIDENCE TABLE</div><div class="arch-sub">Every data point tagged: source · timestamp · confidence tier · field-level provenance</div></div>
+            <div class="arch-box highlight"><div class="arch-label">EVIDENCE TABLE</div><div class="arch-sub">Every data point: source · timestamp · confidence tier · field-level provenance</div></div>
           </div>
           <div class="arch-row">
             <div class="arch-box highlight"><div class="arch-label">6 SCORING AGENTS</div><div class="arch-sub">COO Confidence · Quality Rating · Pricing Intelligence · Geopolitical Risk · Political Nexus · NDC Metadata</div></div>
             <div class="arch-arrow">→</div>
-            <div class="arch-box"><div class="arch-label">MIA SCORE + CONFIDENCE TIER</div><div class="arch-sub">0–100 composite · HIGH / MODERATE / LOW · 44-factor additive model · full audit trail</div></div>
+            <div class="arch-box"><div class="arch-label">MIA SCORE + CONFIDENCE</div><div class="arch-sub">0–100 composite · HIGH / MODERATE / LOW · 44-factor additive model · full audit trail</div></div>
           </div>
           <div class="arch-row">
-            <div class="arch-box"><div class="arch-label">CCP HARD FLOOR</div><div class="arch-sub">Enforced in Python — not in AI prompt · 13 source screens · no override · no exception</div></div>
+            <div class="arch-box" style="border-color:var(--red)"><div class="arch-label" style="color:var(--red)">CCP HARD FLOOR</div><div class="arch-sub">Python-enforced · <span class="redacted" data-redacted="13 source screens">13 source screens</span> · no prompt override · no exception · no certification bypass</div></div>
             <div class="arch-arrow">+</div>
-            <div class="arch-box"><div class="arch-label">RECONCILER + DATA INSPECTOR</div><div class="arch-sub">Independent verification · 9 finding types · discrepancies · logic adjustments · continuous improvement loop</div></div>
+            <div class="arch-box"><div class="arch-label">RECONCILER + INSPECTOR</div><div class="arch-sub">Independent verification · 9 finding types · continuous improvement loop</div></div>
             <div class="arch-arrow">→</div>
             <div class="arch-box highlight"><div class="arch-label">PROCUREMENT INTELLIGENCE</div><div class="arch-sub">BAA/TAA flags · shortage alerts · domestic alternatives · executive briefings · NLQ interface</div></div>
           </div>
           <div class="arch-note">
-            // No single source is sufficient. The platform uses all of them — federal registrations, trade data, corporate filings, political disclosures, AI-extracted label text — and converges independent signals into a confidence-weighted determination with full evidence provenance. That is why it works.
+            // No single source is sufficient. TradeSpy.ai uses all of them and converges independent signals into a confidence-weighted determination. That is why the label is not the answer. That is why 31 agents are the answer.
           </div>
         </div>
       </div>
@@ -215,28 +575,28 @@
     <!-- ── WHO IT'S FOR ── -->
     <section id="evidence" style="padding-top:3rem">
       <div class="evidence-col">
-        <div class="evidence-tag">◈ GOVERNMENT PROCUREMENT</div>
+        <div class="evidence-tag">◈ TARGET: GOVERNMENT</div>
         <h3 class="col-head">VA, DoD, and Federal Contracting Officers</h3>
         <div class="col-body">
-          <p>Instant BAA/TAA eligibility determination for every product. COO evidence audit trail. Domestic alternatives with side-by-side MIA score comparison. Executive briefings formatted for Congressional staff and C-suite. Natural language queries that return intelligence briefings in seconds — designed to be operated by contracting officers, not data scientists.</p>
-          <p>The IARI Risk Index provides a composite national risk score across MIA, shortage impact, COO confidence, and recall severity — a single number for portfolio-level procurement decisions.</p>
-          <p style="margin-top:1rem;font-family:var(--mono);font-size:0.7rem;color:var(--ink-3)">NAICS: 541519 · 541690 · 611430<br>Small Business · For-Profit Corporation</p>
+          <p>Instant BAA/TAA eligibility determination for every product. COO evidence audit trail. Domestic alternatives with side-by-side MIA score comparison. Executive briefings formatted for Congressional staff and C-suite. Natural language queries that return intelligence briefings in seconds.</p>
+          <p>The IARI Risk Index provides a composite national risk score — a single number for portfolio-level procurement decisions.</p>
+          <p style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-3);margin-top:1rem">NAICS: 541519 · 541690 · 611430<br>Small Business · For-Profit Corporation</p>
         </div>
       </div>
       <div class="evidence-col">
-        <div class="evidence-tag">◈ HOSPITAL & GPO PROCUREMENT</div>
+        <div class="evidence-tag">◈ TARGET: HOSPITAL & GPO</div>
         <h3 class="col-head">Formulary Managers and Supply Chain Teams</h3>
         <div class="col-body">
           <p>Upload your formulary. Receive a portfolio risk report — aggregate risk score, country concentration, China dependency by therapeutic class, shortage early warning on every product, and domestic alternative recommendations with side-by-side pricing.</p>
-          <p>The 30/60/90-day shortage radar provides the lead time to act before a disruption becomes a crisis. Therapeutic alternative mapping delivers a specific domestic substitute — not a general suggestion. Every recommendation is evidence-backed.</p>
+          <p>The 30/60/90-day shortage radar provides the lead time to act before a disruption becomes a crisis. <span data-tooltip="// specific substitute, not a general suggestion">Therapeutic alternative mapping delivers a specific domestic substitute.</span></p>
         </div>
       </div>
       <div class="evidence-col">
-        <div class="evidence-tag">◈ MANUFACTURERS</div>
+        <div class="evidence-tag">◈ TARGET: MANUFACTURERS</div>
         <h3 class="col-head">Companies That Make Drugs in America</h3>
         <div class="col-body">
-          <p>If your drugs are manufactured in the United States, iRemedy.ai gives you a direct path to prove it — with verified claims reflected across every government and hospital procurement workflow using the platform.</p>
-          <p>The Self-Attestation System allows manufacturers to submit documented domestic manufacturing claims via AI chatbot. Email domain verification, admin review workflow, and full audit trail. Approved attestations set COO confidence to 100% Made-in-America and propagate immediately across all platform views.</p>
+          <p>If your drugs are manufactured in the United States, TradeSpy.ai gives you a direct path to prove it — with verified claims reflected across every government and hospital procurement workflow using the platform.</p>
+          <p>The Self-Attestation System allows manufacturers to submit documented domestic manufacturing claims. Email domain verification, admin review, full audit trail. Approved attestations set COO confidence to <strong>100% Made-in-America</strong> and propagate immediately.</p>
         </div>
       </div>
     </section>
@@ -250,7 +610,7 @@
     <div class="cred-block">
       <div class="cred-block-icon">💉</div>
       <div class="cred-block-title">1.1 Billion Units Delivered</div>
-      <div class="cred-block-sub">Operation Warp Speed — one in every two COVID vaccine doses administered using iRemedy product</div>
+      <div class="cred-block-sub">Operation Warp Speed — <span class="redacted" data-redacted="one in every two COVID vaccine doses">one in every two COVID vaccine doses</span> administered using this infrastructure</div>
     </div>
     <div class="cred-block">
       <div class="cred-block-icon">🏛️</div>
@@ -265,7 +625,7 @@
     <div class="cred-block">
       <div class="cred-block-icon">🛡️</div>
       <div class="cred-block-title">SAMS Coalition Founder</div>
-      <div class="cred-block-sub">Securing America's Medicines & Supply — the principal D.C. advocacy body on pharmaceutical supply chain risk</div>
+      <div class="cred-block-sub">Securing America's Medicines & Supply — principal D.C. advocacy body on pharmaceutical supply chain risk</div>
     </div>
   </div>
 
@@ -275,15 +635,16 @@
     <section id="diagram" style="padding-top:3rem">
       <div class="diagram-left">
         <div>
-          <div class="evidence-tag">◈ EXHIBIT D — EVIDENCE ARCHITECTURE</div>
+          <div class="evidence-tag">◈ EXHIBIT D — INTELLIGENCE SOURCES</div>
           <h2>13+ Sources.<br>Every Field Attributed.<br>Nothing Hidden.</h2>
-          <p>iRemedy.ai draws from federal registrations, corporate filings, environmental records, international certifications, trade data, political disclosures, and AI-powered document analysis. No single source is sufficient. The platform uses all of them.</p>
-          <p style="margin-top:1rem">Every data point carries its source, its collection timestamp, and its confidence contribution. The evidence is not behind the score — it is the product. Procurement officers can drill to the field level and see exactly what drove every determination.</p>
+          <p>TradeSpy.ai draws from federal registrations, corporate filings, environmental records, international certifications, trade data, political disclosures, and AI-powered document analysis. No single source is sufficient. The platform uses all of them.</p>
+          <p style="margin-top:1rem">Every data point carries its source, its collection timestamp, and its confidence contribution. <span data-tooltip="// procurement officers can drill to field level">The evidence is not behind the score — it is the product.</span></p>
         </div>
         <div style="margin-top:2rem">
           <div class="side-head">NEWS RISK MULTIPLIER</div>
           <div class="side-body">
-            <p>The NDC Risk Scorer includes a real-time news risk signal — auto-refreshed every 4 hours. Supply chain events, regulatory actions, geopolitical developments, and manufacturer news feed directly into the risk score. The platform does not wait for quarterly updates. It does not wait at all.</p>
+            <p>The NDC Risk Scorer includes a real-time news risk signal — auto-refreshed every 4 hours. Supply chain events, regulatory actions, geopolitical developments, and manufacturer news feed directly into the risk score.</p>
+            <p style="margin-top:0.75rem;font-family:var(--mono);font-size:0.62rem;color:var(--red)">// THE PLATFORM DOES NOT WAIT.<br>// <span class="redacted" data-redacted="IT DOES NOT WAIT AT ALL.">IT DOES NOT WAIT AT ALL.</span></p>
           </div>
         </div>
       </div>
@@ -292,25 +653,25 @@
           <div class="arch-row">
             <div class="arch-box"><div class="arch-label">FEDERAL GOVERNMENT</div><div class="arch-sub">FDA NDC · FDA Recalls · FDA Shortages · FDA Import Refusals · FDA Establishments · Drugs@FDA · FDA Label API · DailyMed SPL · RxNorm · NADAC · EPA TRI · SEC EDGAR</div></div>
             <div class="arch-arrow">→</div>
-            <div class="arch-box highlight"><div class="arch-label">MIA SCORE · COO CONFIDENCE</div><div class="arch-sub">0–100 composite · 44 factors · HIGH / MODERATE / LOW · full audit trail per field</div></div>
+            <div class="arch-box highlight"><div class="arch-label">MIA SCORE · COO CONFIDENCE</div><div class="arch-sub">0–100 · 44 factors · HIGH / MODERATE / LOW · full audit trail per field</div></div>
           </div>
           <div class="arch-row">
-            <div class="arch-box"><div class="arch-label">POLITICAL INTELLIGENCE</div><div class="arch-sub">FEC Campaign Donations · Senate LDA Lobbying · Politician Stock Holdings · PAC Contributions</div></div>
+            <div class="arch-box"><div class="arch-label">POLITICAL INTELLIGENCE</div><div class="arch-sub"><span class="redacted" data-redacted="FEC Campaign Donations · Senate LDA Lobbying · Politician Stock Holdings · PAC Contributions">FEC Campaign Donations · Senate LDA Lobbying · Politician Stock Holdings · PAC Contributions</span></div></div>
             <div class="arch-arrow">→</div>
             <div class="arch-box"><div class="arch-label">POLITICAL NEXUS SCORE</div><div class="arch-sub">Manufacturer-to-politician financial linkage — visible, auditable, procurement-relevant</div></div>
           </div>
           <div class="arch-row">
             <div class="arch-box"><div class="arch-label">INTERNATIONAL</div><div class="arch-sub">WHO Prequalification · EudraGMDP EU GMP · PharmaCompass DMF · UN Comtrade Import Data by HS4</div></div>
             <div class="arch-arrow">→</div>
-            <div class="arch-box highlight"><div class="arch-label">API DEPENDENCY INTELLIGENCE</div><div class="arch-sub">Real trade flows · China/India % per HS4 · acceleration & displacement detection · upstream ingredient exposure behind Western labels</div></div>
+            <div class="arch-box highlight"><div class="arch-label">API DEPENDENCY INTELLIGENCE</div><div class="arch-sub">Real trade flows · China/India % per HS4 · acceleration & displacement detection · upstream exposure behind Western labels</div></div>
           </div>
           <div class="arch-row">
             <div class="arch-box"><div class="arch-label">AI-POWERED EXTRACTION</div><div class="arch-sub">Claude Vision Package OCR · Claude Haiku SPL Label Analysis · CCP Screening (13 sources)</div></div>
             <div class="arch-arrow">→</div>
-            <div class="arch-box"><div class="arch-label">LABEL INTELLIGENCE</div><div class="arch-sub">Country of origin extracted from package images and SPL text — capturing what the FDA record doesn't show</div></div>
+            <div class="arch-box"><div class="arch-label">LABEL INTELLIGENCE</div><div class="arch-sub">COO extracted from package images and SPL text — capturing what the FDA record doesn't show</div></div>
           </div>
           <div class="arch-note">
-            // 6 patents cover the core architectural primitives: multi-platform task decomposition · descriptor normalization · failure detection and recovery · intelligent data reacquisition. The agent swarm is not a prototype. It is a patented production architecture.
+            // 6 patents cover the core architectural primitives. The agent swarm is not a prototype. It is a patented production architecture operating on 29,000+ NDCs right now.
           </div>
         </div>
       </div>
@@ -321,15 +682,15 @@
     <!-- ── CONTACT ── -->
     <section id="contact">
       <div class="contact-left">
-        <div class="evidence-tag">◈ EXHIBIT E — ACCESS & CONTRACTING</div>
+        <div class="evidence-tag">◈ EXHIBIT E — CONTACT // SECURE CHANNEL</div>
         <h2>Request Platform Access</h2>
         <p style="font-size:0.9rem;color:var(--ink-2);margin-bottom:1.5rem;line-height:1.75">
-          iRemedy.ai is available to federal agencies, hospital systems, GPOs, and pharmaceutical manufacturers. Platform access, API integration, and enterprise licensing available. Government contracting information below.
+          TradeSpy.ai is available to federal agencies, hospital systems, GPOs, and pharmaceutical manufacturers. Platform access, API integration, and enterprise licensing available.
         </p>
         <div class="contact-channels">
           <div class="contact-ch">
             <span class="ch-label">PLATFORM</span>
-            <span class="ch-value"><a href="https://iremedy.ai">iremedy.ai</a></span>
+            <span class="ch-value"><a href="https://tradespy.ai">tradespy.ai</a></span>
           </div>
           <div class="contact-ch">
             <span class="ch-label">EMAIL</span>
@@ -345,17 +706,16 @@
           </div>
           <div class="contact-ch">
             <span class="ch-label">HQ</span>
-            <span class="ch-value">7118 South Kanner Highway, Stuart, FL 34997</span>
+            <span class="ch-value"><span class="redacted" data-redacted="7118 S. Kanner Hwy, Stuart FL">7118 S. Kanner Hwy, Stuart FL</span></span>
           </div>
         </div>
-        <div style="margin-top:2rem">
-          <span class="stamp approved">GOVERNMENT PROCUREMENT READY</span>
-          &nbsp;
-          <span class="stamp">SMALL BUSINESS</span>
+        <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap">
+          <span class="stamp-ts green">Gov Procurement Ready</span>
+          <span class="stamp-ts">Small Business</span>
         </div>
       </div>
       <div class="contact-right">
-        <h3>// File an access request</h3>
+        <h3>// File an access request<span class="blink">_</span></h3>
         <form class="contact-form" id="contact-form">
           <div class="form-field">
             <label>Name</label>
@@ -371,9 +731,9 @@
           </div>
           <div class="form-field">
             <label>Use Case</label>
-            <textarea placeholder="Describe your procurement intelligence need — formulary risk assessment, BAA/TAA compliance, CCP screening, shortage monitoring, or other."></textarea>
+            <textarea placeholder="Describe your procurement intelligence need — formulary risk, BAA/TAA compliance, CCP screening, shortage monitoring, or other."></textarea>
           </div>
-          <button type="submit" class="btn-submit">REQUEST ACCESS →</button>
+          <button type="submit" class="btn-submit">SUBMIT REQUEST →</button>
         </form>
       </div>
     </section>
@@ -382,17 +742,263 @@
 
   <!-- ── FOOTER ── -->
   <footer>
-    <img src="assets/iRemedy_Logo_wo_Slogan.png" alt="iRemedy">
-    <span class="footer-mono">CASE FILE AI-2026-001 · © 2026 iRemedy Healthcare Companies, Inc. · All Rights Reserved · iRemedy.ai</span>
+    <div style="display:flex;align-items:center;justify-content:center;gap:0.75rem;margin-bottom:0.75rem;">
+      <svg width="20" height="20" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.5">
+        <circle cx="20" cy="20" r="10" stroke="#c8160a" stroke-width="1.5" fill="none"/>
+        <circle cx="20" cy="20" r="3" fill="#c8160a" opacity="0.6"/>
+        <line x1="20" y1="0" x2="20" y2="8" stroke="#c8160a" stroke-width="1.5"/>
+        <line x1="20" y1="32" x2="20" y2="40" stroke="#c8160a" stroke-width="1.5"/>
+        <line x1="0" y1="20" x2="8" y2="20" stroke="#c8160a" stroke-width="1.5"/>
+        <line x1="32" y1="20" x2="40" y2="20" stroke="#c8160a" stroke-width="1.5"/>
+      </svg>
+      <span style="font-family:var(--mono);font-size:1rem;font-weight:600;color:rgba(255,255,255,0.7)">Trade<span style="color:#c8160a">Spy</span>.ai</span>
+    </div>
+    <span class="footer-mono">CASE FILE TS-2026-001 · © 2026 TradeSpy.ai · Powered by iRemedy Healthcare Companies, Inc. · All Rights Reserved · <span id="secret-stamp" style="cursor:crosshair;opacity:0.3;user-select:none;" title="...">⊕</span></span>
     <ul class="footer-links">
       <li><a href="#capabilities-sheet">Capabilities</a></li>
       <li><a href="#diagram">Architecture</a></li>
-      <li><a href="https://iremedy.ai">Platform</a></li>
+      <li><a href="https://tradespy.ai">Platform</a></li>
       <li><a href="#contact">Access</a></li>
     </ul>
   </footer>
 
+  <!-- CURSOR TRAIL -->
+  <div id="cursor-trail">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="5" stroke="#c8160a" stroke-width="1"/>
+      <line x1="12" y1="0" x2="12" y2="5" stroke="#c8160a" stroke-width="1"/>
+      <line x1="12" y1="19" x2="12" y2="24" stroke="#c8160a" stroke-width="1"/>
+      <line x1="0" y1="12" x2="5" y2="12" stroke="#c8160a" stroke-width="1"/>
+      <line x1="19" y1="12" x2="24" y2="12" stroke="#c8160a" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- CUSTOM CONTEXT MENU -->
+  <div id="ctx-menu">ACCESS DENIED — CLASSIFIED DOCUMENT</div>
+
+  <!-- SURVEILLANCE OVERLAY -->
+  <div id="surveillance-overlay">
+    <div class="surv-inner">
+      <div class="surv-big">👁 SURVEILLANCE ACTIVE</div>
+      <div class="surv-sub">// IDLE TIMEOUT DETECTED · MONITORING RESUMED · MOVE TO DISMISS</div>
+    </div>
+  </div>
+
+  <!-- COPY TOAST -->
+  <div id="copy-toast">// CONTENT COPIED — YOU ARE BEING MONITORED</div>
+
+  <!-- AGENT TERMINAL TOGGLE -->
+  <button id="terminal-toggle" onclick="toggleTerminal()">⬛ AGENT FEED</button>
+
+  <!-- AGENT TERMINAL -->
+  <div id="agent-terminal">
+    <div class="terminal-header" onclick="toggleTerminal()">
+      <span>// LIVE AGENT FEED</span>
+      <span style="opacity:0.5;font-size:0.5rem">[MINIMIZE]</span>
+    </div>
+    <div class="terminal-body">
+      <div class="terminal-log" id="terminal-log"></div>
+    </div>
+  </div>
+
   <script src="js/main.js"></script>
   <script src="js/animations.js"></script>
+  <script>
+    // ── TYPEWRITER ──
+    const twLines = ['Can we prove', 'where our drugs', 'are made?'];
+    let twFull = twLines.join('\n'), twPos = 0;
+    const twEl = document.getElementById('typewriter-text');
+    const twCursor = document.getElementById('tw-cursor');
+    function typeWriter() {
+      if (!twEl) return;
+      if (twPos < twFull.length) {
+        const char = twFull[twPos];
+        if (char === '\n') twEl.innerHTML += '<br>';
+        else twEl.innerHTML += char;
+        twPos++;
+        setTimeout(typeWriter, twPos < 10 ? 80 : 45);
+      } else {
+        // Done typing — keep cursor blinking then fade it
+        setTimeout(() => { if (twCursor) twCursor.style.display = 'none'; }, 2000);
+      }
+    }
+    setTimeout(typeWriter, 600);
+
+    // ── GLITCH on TradeSpy wordmark ──
+    const glitchEls = document.querySelectorAll('.glitch-text, #masthead h1, #masthead .masthead-tagline');
+    function triggerGlitch() {
+      const el = document.querySelector('#masthead div[style*="font-family:var(--mono)"] span:nth-child(2)');
+      if (el) {
+        el.style.textShadow = '2px 0 #c8160a, -2px 0 #00a8c8';
+        el.style.transform = 'translateX(2px)';
+        setTimeout(() => { el.style.textShadow = ''; el.style.transform = ''; }, 120);
+        setTimeout(() => {
+          el.style.textShadow = '-2px 0 #c8160a, 2px 0 #00a8c8';
+          setTimeout(() => { el.style.textShadow = ''; }, 80);
+        }, 160);
+      }
+      // Schedule next glitch randomly 4-12s
+      setTimeout(triggerGlitch, 4000 + Math.random() * 8000);
+    }
+    setTimeout(triggerGlitch, 3000);
+
+    // ── CROSSHAIR CURSOR TRAIL ──
+    const trail = document.getElementById('cursor-trail');
+    if (trail) {
+      document.addEventListener('mousemove', (e) => {
+        trail.style.left = e.clientX + 'px';
+        trail.style.top = e.clientY + 'px';
+      });
+    }
+
+    // ── CUSTOM CONTEXT MENU ──
+    const ctxMenu = document.getElementById('ctx-menu');
+    document.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      ctxMenu.style.display = 'block';
+      ctxMenu.style.left = e.clientX + 'px';
+      ctxMenu.style.top = e.clientY + 'px';
+      setTimeout(() => ctxMenu.style.display = 'none', 2000);
+    });
+    document.addEventListener('click', () => ctxMenu.style.display = 'none');
+
+    // ── SURVEILLANCE IDLE OVERLAY ──
+    const survOverlay = document.getElementById('surveillance-overlay');
+    let idleTimer;
+    function resetIdle() {
+      clearTimeout(idleTimer);
+      if (survOverlay.classList.contains('show')) { survOverlay.classList.remove('show'); }
+      idleTimer = setTimeout(() => survOverlay.classList.add('show'), 60000);
+    }
+    document.addEventListener('mousemove', resetIdle);
+    document.addEventListener('keydown', resetIdle);
+    document.addEventListener('scroll', resetIdle);
+    resetIdle();
+
+    // ── COPY TOAST ──
+    const copyToast = document.getElementById('copy-toast');
+    document.addEventListener('copy', () => {
+      copyToast.classList.add('show');
+      setTimeout(() => copyToast.classList.remove('show'), 3000);
+    });
+
+    // ── THREAT LEVEL TICKER ──
+    const threatEl = document.getElementById('threat-level');
+    const threatLevels = [
+      { label: 'ELEVATED', cls: 'threat-elevated' },
+      { label: 'HIGH', cls: 'threat-high' },
+      { label: 'ELEVATED', cls: 'threat-elevated' },
+      { label: 'CRITICAL', cls: 'threat-critical' },
+      { label: 'HIGH', cls: 'threat-high' },
+    ];
+    let threatIdx = 0;
+    function cycleThreat() {
+      if (!threatEl) return;
+      threatEl.className = 'threat-level-val';
+      const t = threatLevels[threatIdx % threatLevels.length];
+      threatEl.textContent = t.label;
+      threatEl.classList.add(t.cls);
+      threatIdx++;
+      setTimeout(cycleThreat, 5000 + Math.random() * 8000);
+    }
+    setTimeout(cycleThreat, 4000);
+
+    // ── AGENT TERMINAL ──
+    const agents = ['COO_AGENT','QRS_AGENT','PIS_AGENT','COORS_AGENT','PNS_AGENT','NDC_AGENT'];
+    const actions = ['SCORED','FLAGGED','UPDATED','RESCORED','CONFLICT DETECTED','CCP FLAG SET','SHORTAGE ALERT','DATA STALE — RESCRAPING'];
+    const countries = ['China','India','Germany','Ireland','USA','Canada','Switzerland'];
+    const ndcs = ['00093-0058','00378-1610','16714-0450','00591-0405','43598-0280','00143-1205','50228-0001','00456-0630'];
+    const termLog = document.getElementById('terminal-log');
+    let termLines = [];
+
+    function addTermLine() {
+      if (!termLog) return;
+      const agent = agents[Math.floor(Math.random() * agents.length)];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+      const ndc = ndcs[Math.floor(Math.random() * ndcs.length)];
+      const country = countries[Math.floor(Math.random() * countries.length)];
+      const now = new Date();
+      const ts = now.toTimeString().substring(0,8);
+      const isCCP = action.includes('CCP') || action.includes('CONFLICT');
+      const line = document.createElement('div');
+      line.className = 'terminal-line' + (isCCP ? ' new' : '');
+      line.textContent = `[${ts}] ${agent} → NDC ${ndc} → ${action} → ${country}`;
+      termLog.appendChild(line);
+      termLines.push(line);
+      if (termLines.length > 12) {
+        termLines[0].remove();
+        termLines.shift();
+      }
+      setTimeout(addTermLine, 800 + Math.random() * 2400);
+    }
+    addTermLine();
+
+    function toggleTerminal() {
+      const term = document.getElementById('agent-terminal');
+      const btn = document.getElementById('terminal-toggle');
+      if (term.style.display === 'block') {
+        term.style.display = 'none';
+        btn.style.display = 'block';
+      } else {
+        term.style.display = 'block';
+        btn.style.display = 'none';
+      }
+    }
+
+    // Live ticker time
+    function updateTicker() {
+      const now = new Date();
+      const t = now.toISOString().replace('T',' ').substring(0,19) + ' UTC';
+      document.querySelectorAll('#ticker-time').forEach(el => el.textContent = t);
+    }
+    updateTicker();
+    setInterval(updateTicker, 1000);
+
+    // Agent grid easter egg — animated dots
+    const grid = document.getElementById('agent-grid');
+    if (grid) {
+      for (let i = 0; i < 31; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'agent-dot' + (Math.random() > 0.3 ? ' active' : '');
+        dot.style.animationDelay = (Math.random() * 3) + 's';
+        dot.title = `Agent #${String(i+1).padStart(2,'0')} — ACTIVE`;
+        grid.appendChild(dot);
+      }
+    }
+
+    // Create access granted overlay first
+    const konamiOverlay = document.createElement('div');
+    konamiOverlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:#0a0a0a;display:none;align-items:center;justify-content:center;flex-direction:column;gap:1rem;font-family:monospace;font-size:1.4rem;color:#c8160a;letter-spacing:0.15em;text-align:center;cursor:pointer;';
+    konamiOverlay.innerHTML = '<div style="font-size:4rem">🎯</div><div style="margin-top:1rem">// ACCESS GRANTED</div><div>// WELCOME, AGENT</div><div style="color:rgba(200,22,10,0.5);font-size:0.75rem;margin-top:2rem;letter-spacing:0.3em">// TRADESPY.AI — CLASSIFIED TIER</div><div style="color:rgba(255,255,255,0.2);font-size:0.6rem;margin-top:3rem;letter-spacing:0.2em">[ CLICK TO DISMISS ]</div>';
+    konamiOverlay.addEventListener('click', () => konamiOverlay.style.display = 'none');
+    document.body.appendChild(konamiOverlay);
+
+    function triggerEasterEgg() {
+      konamiOverlay.style.display = 'flex';
+      setTimeout(() => { konamiOverlay.style.display = 'none'; }, 4000);
+    }
+
+    // Secret footer stamp easter egg
+    const secretBtn = document.getElementById('secret-stamp');
+    if (secretBtn) { secretBtn.addEventListener('click', triggerEasterEgg); }
+
+    // Konami code easter egg (keyboard)
+    let konamiSeq = [];
+    const konamiCode = [38,38,40,40,37,39,37,39,66,65];
+
+    document.addEventListener('keydown', (e) => {
+      konamiSeq.push(e.keyCode);
+      konamiSeq = konamiSeq.slice(-10);
+      if (JSON.stringify(konamiSeq) === JSON.stringify(konamiCode)) {
+        konamiOverlay.style.display = 'flex';
+        
+        setTimeout(() => {
+          
+          konamiOverlay.style.display = 'none';
+        }, 3000);
+        konamiSeq = [];
+      }
+    });
+  </script>
 </body>
 </html>
