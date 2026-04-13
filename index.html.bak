@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TheTradeSpy.ai — Supply Chain Intelligence Platform</title>
-  <meta name="description" content="TheTradeSpy.ai: AI-powered Supply Chain Intelligence Platform. Where does this actually come from — and who controls it?">
+  <title>TradeSpy.ai — Pharmaceutical Supply Chain Intelligence</title>
+  <meta name="description" content="TradeSpy.ai: First-of-its-kind pharmaceutical origin intelligence. Where is this drug actually made — and can we prove it?">
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -316,7 +316,7 @@
   <!-- CLASSIFIED TICKER -->
   <div class="classified-ticker">
     <div class="ticker-inner">
-      ◆ TRADESPY.AI — ACTIVE SURVEILLANCE ◆ 149,000+ NDCs UNDER CONTINUOUS MONITORING ◆ 30+ AUTONOMOUS AGENTS OPERATIONAL ◆ CCP HARD FLOOR: ENFORCED IN CODE, NOT POLICY ◆ LAST SWEEP: <span id="ticker-time"></span> ◆ AGENT STATUS: ALL SYSTEMS NOMINAL ◆ CASE FILE: TS-2026-001 — ACTIVE ◆ THREAT LEVEL: ELEVATED ◆ READING THIS? YOU'RE ALREADY A TARGET. ◆ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◆ TRADESPY.AI — ACTIVE SURVEILLANCE ◆ 149,000+ NDCs UNDER CONTINUOUS MONITORING ◆ 30+ AUTONOMOUS AGENTS OPERATIONAL ◆ CCP HARD FLOOR: ENFORCED IN CODE, NOT POLICY ◆ LAST SWEEP: <span></span> ◆ AGENT STATUS: ALL SYSTEMS NOMINAL ◆ CASE FILE: TS-2026-001 — ACTIVE ◆ THREAT LEVEL: ELEVATED ◆ READING THIS? YOU'RE ALREADY A TARGET. ◆
+      ◆ TRADESPY.AI — ACTIVE SURVEILLANCE ◆ 29,000+ NDCs UNDER CONTINUOUS MONITORING ◆ 31 AUTONOMOUS AGENTS OPERATIONAL ◆ CCP HARD FLOOR: ENFORCED IN CODE, NOT POLICY ◆ LAST SWEEP: <span id="ticker-time"></span> ◆ AGENT STATUS: ALL SYSTEMS NOMINAL ◆ CASE FILE: TS-2026-001 — ACTIVE ◆ THREAT LEVEL: ELEVATED ◆ READING THIS? YOU'RE ALREADY A TARGET. ◆ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;◆ TRADESPY.AI — ACTIVE SURVEILLANCE ◆ 29,000+ NDCs UNDER CONTINUOUS MONITORING ◆ 31 AUTONOMOUS AGENTS OPERATIONAL ◆ CCP HARD FLOOR: ENFORCED IN CODE, NOT POLICY ◆ LAST SWEEP: <span></span> ◆ AGENT STATUS: ALL SYSTEMS NOMINAL ◆ CASE FILE: TS-2026-001 — ACTIVE ◆ THREAT LEVEL: ELEVATED ◆ READING THIS? YOU'RE ALREADY A TARGET. ◆
     </div>
   </div>
 
@@ -326,8 +326,7 @@
       <div class="masthead-meta">
         CASE FILE NO. TS-2026-001<br>
         CLASSIFICATION: <span class="redacted" data-redacted="TOP SECRET">TOP SECRET</span><br>
-        JURISDICTION: UNITED STATES<br>
-        Powered by iRemedy Healthcare Companies, Inc.
+        JURISDICTION: UNITED STATES
       </div>
       <div class="masthead-center">
         <div style="display:flex; align-items:center; justify-content:center; gap:0.75rem; margin-bottom:0.5rem;">
@@ -345,13 +344,13 @@
             <span style="color:var(--ink)">Trade</span><span style="color:var(--red); position:relative;">Spy<span style="position:absolute; left:0; right:0; top:50%; height:1.5px; background:var(--red); opacity:0.3; transform:translateY(-50%);"></span></span><span style="color:var(--ink-3)">.ai</span>
           </div>
         </div>
-        <div class="masthead-tagline">Supply Chain Intelligence Platform</div>
+        <div class="masthead-tagline">Pharmaceutical Supply Chain Intelligence</div>
       </div>
       <div class="masthead-right">
         <div class="mono-sm">
           PLATFORM v2.0<br>
           <span class="redacted" data-redacted="STUART, FLORIDA">STUART, FLORIDA</span><br>
-          THETRADESPY.AI
+          TRADESPY.AI
         </div>
       </div>
     </div>
@@ -360,7 +359,7 @@
     <div class="duality-bar"></div>
 
     <div class="masthead-headline">
-      <div class="headline-kicker">⬛ CASE FILE TS-2026-001 — THE NATIONAL SECURITY PROBLEM NO DATABASE HAS SOLVED</div>
+      <div class="headline-kicker">⬛ CASE FILE TS-2026-001 — THE QUESTION GOVERNMENT PROCUREMENT HAS NEVER ANSWERED</div>
       <h1 class="headline-main" id="typewriter-headline"><span id="typewriter-text"></span><span class="typewriter-cursor" id="tw-cursor"></span></h1>
       <p class="headline-deck">A product labeled Made in France may carry 33% China API dependency. A product labeled Made in New York may be manufactured in Wuhan. The label lies. TradeSpy.ai doesn't.</p>
     </div>
@@ -371,10 +370,10 @@
   <!-- INTEL STATUS BAR -->
   <div class="intel-bar">
     <span class="live">AGENTS ACTIVE</span>
-    <span>149,000+ NDCs MONITORED</span>
-    <span>30+ AUTONOMOUS AGENTS</span>
-    <span>10+ DATA SOURCES</span>
-    <span>50+ RISK FACTORS</span>
+    <span>29,000+ NDCs MONITORED</span>
+    <span>31 AUTONOMOUS AGENTS</span>
+    <span>13+ DATA SOURCES</span>
+    <span>54 RISK FACTORS</span>
     <span>NEWS REFRESH: <strong style="color:var(--red)">4HR</strong></span>
     <span style="color:rgba(255,255,255,0.4)">CASE FILE TS-2026-001<span class="blink">_</span></span>
     <span>THREAT: <strong class="threat-level-val" id="threat-level">ELEVATED</strong></span>
@@ -383,68 +382,48 @@
   <!-- ── BROADSHEET BODY ── -->
   <main class="broadsheet">
 
-    <!-- ── NATIONAL SECURITY NARRATIVE ── -->
-    <section id="national-security" style="padding:3rem 2rem; max-width:900px; margin:0 auto;">
-      <div class="evidence-tag">&#9672; CASE FILE TS-2026-001 &#8212; ACTIVE | THREAT LEVEL: ELEVATED</div>
-      <h2 style="margin:1rem 0 1.5rem;">The National Security Problem<br>No Database Has Solved</h2>
-      <div style="columns:2; column-gap:3rem; font-size:0.88rem; line-height:1.85; color:var(--ink-2);">
-        <p>For five years, America has been learning the same lesson in different industries.</p>
-        <p style="margin-top:1rem">COVID-19 exposed that 80% of U.S. drug APIs were manufactured in China and India. The pandemic also revealed that personal protective equipment had been almost entirely offshored to Chinese factories that stopped exporting the moment Beijing decided they should. The semiconductor shortage that followed shut down American automobile production, grounded defense procurement timelines, and reminded Washington that the microchips inside every weapons system, every power grid controller, and every communications network were being fabricated in Taiwan and South Korea &#8212; within Chinese missile range.</p>
-        <p style="margin-top:1rem">Rare earth elements critical to electric vehicles, guided munitions, and satellite systems are processed almost exclusively in China. The shipping container infrastructure that moves 90% of global trade runs through Chinese-owned terminals on every major ocean. The commercial drones flying over American infrastructure are manufactured overwhelmingly by DJI, a company with documented ties to the People&#8217;s Liberation Army. Iran&#8217;s aggression in the Strait of Hormuz has repeatedly threatened to sever energy supply lines that downstream into petrochemical feedstocks, plastics, and pharmaceutical manufacturing.</p>
-        <p style="margin-top:1rem">The pattern is not coincidental. It is structural. And it is accelerating.</p>
-        <p style="margin-top:1rem">The United States has built a $27 trillion economy on a global supply chain optimized for cost &#8212; not security. That supply chain runs through adversaries, through geopolitically unstable regions, and through layers of intermediaries specifically designed to obscure origin. The label says France. The API comes from Wuhan. The semiconductor says Taiwan. The fabrication equipment comes from a Chinese SOE on the Entity List. The drone says assembled in California. The motor, the battery, and the flight controller ship from Shenzhen.</p>
-        <p style="margin-top:1rem">No procurement officer can see this. No existing database connects these dots. No government system answers the question that underlies every critical purchasing decision:</p>
-        <p style="margin-top:1.5rem; font-family:var(--mono); font-size:0.8rem; color:var(--red); letter-spacing:0.05em;">Where does this actually come from &#8212; and who controls it?</p>
-      </div>
-      <div style="margin-top:2rem; padding:1.5rem; background:var(--paper-3); border-left:3px solid var(--red);">
-        <div class="mono-sm" style="color:var(--red); margin-bottom:0.5rem;">// SECTOR-AGNOSTIC ARCHITECTURE</div>
-        <p style="font-size:0.82rem; color:var(--ink-2); line-height:1.7;">Pharma &nbsp;&#183;&nbsp; Semiconductors &nbsp;&#183;&nbsp; Rare Earths &nbsp;&#183;&nbsp; PPE &nbsp;&#183;&nbsp; Power Grid &nbsp;&#183;&nbsp; Shipping &nbsp;&#183;&nbsp; Drones &nbsp;&#183;&nbsp; Any Critical Supply Chain</p>
-      </div>
-    </section>
-    <div class="rule-h heavy"></div>
-
     <!-- ── LEAD COLUMNS ── -->
     <section id="lead">
       <div class="lead-main">
         <div class="evidence-tag">
           <span>◈</span> FILE TS-A1 — ORIGIN PROBLEM
         </div>
-        <p class="lead-dropcap">TheTradeSpy.ai is an AI-powered Supply Chain Intelligence Platform built to answer the question that underlies every critical purchasing decision: where does this actually come from — and who controls it?</p>
-        <p>The platform deploys autonomous AI agent swarms against federal regulatory records, corporate filings, trade statistics, geopolitical databases, sanctions lists, ownership registries, and political disclosure data to produce a verified, auditable intelligence profile for any product in the U.S. market.</p>
+        <p class="lead-dropcap">TradeSpy.ai is a first-of-its-kind Pharmaceutical Origin Intelligence Platform built to answer the question government procurement has never answered with certainty: where is this drug actually made — and can we prove it?</p>
+        <p>The platform combines FDA regulatory records, SEC filings, EPA environmental data, UN Comtrade trade statistics, <span class="redacted" data-redacted="political donation disclosures">political donation disclosures</span>, and 31 autonomous AI agents to produce a verified, auditable intelligence profile for every drug product in the U.S. market.</p>
         <div class="pullquote">
-          <p>"The platform's architecture is sector-agnostic. The same field agents, analyst agents, and evidence framework that maps pharmaceutical supply chains can map semiconductors, rare earths, power grid components, PPE, shipping infrastructure, and drone supply chains with equal precision."</p>
+          <p>"It screens every Chinese-nexus manufacturer for CCP and state-owned enterprise connections, reveals hidden API dependency behind Western-labeled products, and delivers real-time shortage early warning — all surfaced through a natural language interface that requires no technical expertise to operate."</p>
         </div>
         <p>The <span data-tooltip="// enforced in python, not in prompt">CCP hard floor is enforced in code</span> — not in an AI prompt. No quality certification, no domestic manufacturing bonus, no human override can pull a flagged product below HIGH risk. That is not policy. That is architecture.</p>
         <p>This is a production intelligence platform built by the operators who lived the supply chain crisis firsthand. What follows is the case file.</p>
         <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
-          <span class="stamp-ts">149,000+ NDCs</span>
+          <span class="stamp-ts">29,000+ NDCs</span>
           <span class="stamp-ts green">Agents: Active</span>
-          <span class="stamp-ts blue">30+ Agents</span>
+          <span class="stamp-ts blue">31 Agents</span>
         </div>
       </div>
 
       <div class="lead-side-1">
         <div class="side-head">SURVEILLANCE METRICS</div>
         <div class="stat-box" data-tooltip="// refreshed every 4 hours">
-          <div class="stat-box-num">149,000+</div>
-          <div class="stat-box-label">NDCs under continuous origin surveillance (pharmaceutical vertical — live)</div>
+          <div class="stat-box-num">29,000+</div>
+          <div class="stat-box-label">NDCs under continuous origin surveillance</div>
         </div>
         <div class="stat-box" data-tooltip="// 6 scoring + 25 stewards">
-          <div class="stat-box-num">30+</div>
+          <div class="stat-box-num">31</div>
           <div class="stat-box-label">Autonomous AI agents — zero manual updates</div>
         </div>
         <div class="stat-box">
-          <div class="stat-box-num">10+</div>
+          <div class="stat-box-num">13+</div>
           <div class="stat-box-label">Federal and commercial intelligence sources</div>
         </div>
         <div class="stat-box" data-tooltip="// 44 enabled, 10 documented as non-determinative">
-          <div class="stat-box-num">50+</div>
+          <div class="stat-box-num">54</div>
           <div class="stat-box-label">Risk scoring factors per product</div>
         </div>
 
         <!-- Agent activity easter egg -->
         <div style="margin-top:1.5rem">
-          <div class="mono-sm" style="color:var(--ink-3); margin-bottom:0.5rem;">// AGENT PULSE — 30+ ACTIVE</div>
+          <div class="mono-sm" style="color:var(--ink-3); margin-bottom:0.5rem;">// AGENT PULSE — 31 ACTIVE</div>
           <div class="agent-grid" id="agent-grid"></div>
         </div>
       </div>
@@ -455,8 +434,7 @@
           <p>FDA labeler records identify the U.S. marketing entity that filed the application — <strong>not the facility where the drug was manufactured.</strong></p>
           <p style="margin-top:0.75rem">"Manufactured For" shell arrangements, U.S. HQ conflation, and CMO cascading have made it structurally impossible to trace origin from label alone.</p>
           <p style="margin-top:0.75rem">Over 80% of U.S. drug APIs are sourced overseas. The FDA inspected <span class="redacted" data-redacted="28%">28%</span> of Chinese pharmaceutical facilities in FY2024. For the remaining <span data-tooltip="// unverified. uninspected. in your formulary.">72%</span>, procurement officers are buying from facilities they cannot identify — because the label points to a U.S. subsidiary, not the factory.</p>
-          <p style="margin-top:0.75rem">TheTradeSpy.ai closes that gap. Every determination. Every NDC. Full evidence trail.</p>
-        <p style="margin-top:0.75rem;font-family:var(--mono);font-size:0.6rem;color:var(--ink-3)">// SECTOR-AGNOSTIC: pharma · semiconductors · rare earths · PPE · power grid · shipping · drones</p>
+          <p style="margin-top:0.75rem">TradeSpy.ai closes that gap. Every determination. Every NDC. Full evidence trail.</p>
         </div>
         <div style="margin-top:1.5rem">
           <span class="stamp-ts" style="font-size:0.5rem">FIELD-LEVEL PROVENANCE</span>
@@ -473,7 +451,7 @@
         <h3 class="col-head">The Label Lies.<br>TradeSpy.ai Doesn't.</h3>
         <div class="col-body">
           <p>A product labeled Made in France may carry 33% China API dependency. A product with a New York headquarters may have its active pharmaceutical ingredient manufactured in Wuhan. Neither fact appears on the label.</p>
-          <p>TheTradeSpy.ai reveals upstream ingredient exposure using real, verifiable import / export global trade data — not inference, not sampling, not self-reported attestation. Actual trade flows. Actual countries. Actual percentages.</p>
+          <p>TradeSpy.ai is the only platform that reveals upstream ingredient exposure using real, verifiable UN Comtrade trade data — not inference, not sampling, not self-reported attestation. Actual trade flows. Actual countries. Actual percentages.</p>
           <p>Every determination carries its evidence: the source, the timestamp, the confidence tier, and the specific factor that drove the conclusion. <span data-tooltip="// the audit trail IS the product">The audit trail is the product.</span></p>
         </div>
       </div>
@@ -490,7 +468,7 @@
         <div class="evidence-tag">◈ FIELD REPORT: PROVENANCE</div>
         <h3 class="col-head">Built by the<br>Operators Who<br>Lived It.</h3>
         <div class="col-body">
-          <p>TheTradeSpy.ai is built on 18 years of operations inside the supply chain it maps. The founding team has imported over one billion medical devices, supplies and drugs for the DoD, other government agencies, and commercial hospitals and healthcare providers.</p>
+          <p>TradeSpy.ai is built on 18 years of operations inside the supply chain it maps. During Operation Warp Speed, the founding team delivered 1.1 billion needle and syringe units under DoD contract — one in every two COVID vaccine doses was administered using this infrastructure.</p>
           <p>The data gaps TradeSpy.ai closes were not discovered through academic analysis. They were discovered by executing real transactions in a broken system, testifying before the U.S. Senate, and briefing the White House on foreign API dependency.</p>
           <p>The platform is the product of that experience. <span data-tooltip="// that is why nothing else compares">That is why nothing else compares.</span></p>
         </div>
@@ -529,7 +507,7 @@
         <div class="cap-row scanline-hover">
           <div class="cap-row-num">03</div>
           <div class="cap-row-name">Operational Intelligence</div>
-          <div class="cap-row-desc">Shortage Early Warning with 30/60/90-day predictive risk radar and cause analysis feed. Natural Language Query — plain English questions return formatted intelligence briefings in seconds; designed for contracting officers, not data scientists. Executive Briefing Generator with four audience templates including Congressional staff and C-suite, PDF export. Geopolitical Intelligence Center with China dependency deep dives, therapeutic vulnerability analysis, and legislation tracker. Supply Risk Index (SRI) — composite national risk score across MIA, shortage impact, COO confidence, and recall severity.</div>
+          <div class="cap-row-desc">Shortage Early Warning with 30/60/90-day predictive risk radar and cause analysis feed. Natural Language Query — plain English questions return formatted intelligence briefings in seconds; designed for contracting officers, not data scientists. Executive Briefing Generator with four audience templates including Congressional staff and C-suite, PDF export. Geopolitical Intelligence Center with China dependency deep dives, therapeutic vulnerability analysis, and legislation tracker. iRemedy American Risk Index (IARI) — composite national risk score across MIA, shortage impact, COO confidence, and recall severity.</div>
           <div class="cap-row-tag">SHORTAGE · NLQ · BRIEFINGS</div>
         </div>
 
@@ -543,29 +521,25 @@
       <div class="diagram-left">
         <div>
           <div class="evidence-tag">◈ EXHIBIT C — THE ENGINE // <span style="color:var(--cyan)">CLASSIFIED</span></div>
-          <h2>30+ Agents.<br>Zero Manual Updates.<br>Continuous Operation.</h2>
-          <p>30+ autonomous AI agents run around the clock — 25+ field agents collecting evidence from federal and commercial databases, 6+ analyst agents applying the 44-factor model, an independent Reconciler validating every conclusion, and a Data Inspector flagging discrepancies, stale data, and scoring improvements.</p>
-          <p style="margin-top:1rem">Every competitor relies on periodic manual data refreshes. TheTradeSpy.ai's agents continuously collect, score, and reconcile — with news risk signals updating every 4 hours. <span data-tooltip="// it compounds. that is the design.">The system gets more accurate over time.</span></p>
+          <h2>31 Agents.<br>Zero Manual Updates.<br>Continuous Operation.</h2>
+          <p>31 autonomous AI agents run around the clock — 25 data steward agents collecting evidence from federal and commercial databases, 6 scoring agents applying the 44-factor model, an independent Reconciler validating every conclusion, and a Data Inspector flagging discrepancies, stale data, and scoring improvements.</p>
+          <p style="margin-top:1rem">Every competitor relies on periodic manual data refreshes. TradeSpy.ai's agents continuously collect, score, and reconcile — with news risk signals updating every 4 hours. <span data-tooltip="// it compounds. that is the design.">The system gets more accurate over time.</span></p>
         </div>
         <div style="margin-top:2rem">
           <div class="side-head">WHY NOTHING ELSE COMPARES</div>
           <div class="side-body">
-            <p><strong>30 agents vs. quarterly updates.</strong> Continuous vs. periodic. Evidence-backed vs. self-reported. CCP floor in code vs. advisory flag. Political exposure visible vs. invisible. Natural language vs. SQL.</p>
+            <p><strong>31 agents vs. quarterly updates.</strong> Continuous vs. periodic. Evidence-backed vs. self-reported. CCP floor in code vs. advisory flag. Political exposure visible vs. invisible. Natural language vs. SQL.</p>
             <p style="margin-top:0.75rem">Ask it anything — <span data-tooltip="// seconds, not days">"List all products from CCP-flagged manufacturers in the cardiovascular formulary"</span> — and get an intelligence briefing in seconds.</p>
           </div>
           <div style="margin-top:1.5rem">
             <div class="side-head">PATENT RECORD</div>
             <div class="side-body" style="font-family:var(--mono);font-size:0.62rem;line-height:2.2;color:var(--ink-3)">
-              US 11,983,236 · Failure Detection &amp; Recovery<br>
-              US 11,860,967 · Descriptor Normalization<br>
-              US 12,332,966 · Supply-Chain Task Automation<br>
-              US 12,468,774 · Data Reacquisition<br>
-              US 11,640,440 · Website Data Modeling<br>
-              US 11,416,575 · Multi-Platform Task Execution<br>
-              US 11,568,019 · Function Description Modeling<br>
-              US 11,580,190 · Substitute Task Handling<br>
-              US 12,259,940 · ML-Based Data Modeling<br>
-              US 12,326,913 · Complex Task Fault Recovery
+              US 11,983,236 · Failure detection & recovery<br>
+              US 11,860,967 · Descriptor normalization<br>
+              US 12,332,966 · Task decomposition<br>
+              US 12,468,774 · Data reacquisition<br>
+              US 11,640,440 · Structure identification<br>
+              US 11,416,575 · Complex task execution
             </div>
           </div>
         </div>
@@ -573,12 +547,12 @@
       <div class="diagram-right">
         <div class="arch-diagram">
           <div class="arch-row">
-            <div class="arch-box"><div class="arch-label">25+ FIELD AGENTS</div><div class="arch-sub">FDA · SEC · EPA · WHO · EMA · FEC · Comtrade · DailyMed · RxNorm · <span class="redacted" data-redacted="PharmaCompass · CCP · Lobbying · Politician Holdings">PharmaCompass · CCP · Lobbying · Politician Holdings</span></div></div>
+            <div class="arch-box"><div class="arch-label">25 DATA STEWARD AGENTS</div><div class="arch-sub">FDA · SEC · EPA · WHO · EMA · FEC · Comtrade · DailyMed · RxNorm · <span class="redacted" data-redacted="PharmaCompass · CCP · Lobbying · Politician Holdings">PharmaCompass · CCP · Lobbying · Politician Holdings</span></div></div>
             <div class="arch-arrow">→</div>
             <div class="arch-box highlight"><div class="arch-label">EVIDENCE TABLE</div><div class="arch-sub">Every data point: source · timestamp · confidence tier · field-level provenance</div></div>
           </div>
           <div class="arch-row">
-            <div class="arch-box highlight"><div class="arch-label">6+ ANALYST AGENTS</div><div class="arch-sub">COO Confidence · Quality Rating · Pricing Intelligence · Geopolitical Risk · Political Nexus · NDC Metadata</div></div>
+            <div class="arch-box highlight"><div class="arch-label">6 SCORING AGENTS</div><div class="arch-sub">COO Confidence · Quality Rating · Pricing Intelligence · Geopolitical Risk · Political Nexus · NDC Metadata</div></div>
             <div class="arch-arrow">→</div>
             <div class="arch-box"><div class="arch-label">MIA SCORE + CONFIDENCE</div><div class="arch-sub">0–100 composite · HIGH / MODERATE / LOW · 44-factor additive model · full audit trail</div></div>
           </div>
@@ -590,7 +564,7 @@
             <div class="arch-box highlight"><div class="arch-label">PROCUREMENT INTELLIGENCE</div><div class="arch-sub">BAA/TAA flags · shortage alerts · domestic alternatives · executive briefings · NLQ interface</div></div>
           </div>
           <div class="arch-note">
-            // No single source is sufficient. TheTradeSpy.ai uses all of them and converges independent signals into a confidence-weighted determination. That is why the label is not the answer. That is why 31 agents are the answer.
+            // No single source is sufficient. TradeSpy.ai uses all of them and converges independent signals into a confidence-weighted determination. That is why the label is not the answer. That is why 31 agents are the answer.
           </div>
         </div>
       </div>
@@ -605,8 +579,8 @@
         <h3 class="col-head">VA, DoD, and Federal Contracting Officers</h3>
         <div class="col-body">
           <p>Instant BAA/TAA eligibility determination for every product. COO evidence audit trail. Domestic alternatives with side-by-side MIA score comparison. Executive briefings formatted for Congressional staff and C-suite. Natural language queries that return intelligence briefings in seconds.</p>
-          <p>The SRI Risk Index provides a composite national risk score — a single number for portfolio-level procurement decisions.</p>
-          <p style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-3);margin-top:1rem">NAICS: 541519 · 541690 · 611430<br>Small Business · For-Profit Corporation<br>HQ: Stuart, Florida</p>
+          <p>The IARI Risk Index provides a composite national risk score — a single number for portfolio-level procurement decisions.</p>
+          <p style="font-family:var(--mono);font-size:0.65rem;color:var(--ink-3);margin-top:1rem">NAICS: 541519 · 541690 · 611430<br>Small Business · For-Profit Corporation</p>
         </div>
       </div>
       <div class="evidence-col">
@@ -662,8 +636,8 @@
       <div class="diagram-left">
         <div>
           <div class="evidence-tag">◈ EXHIBIT D — INTELLIGENCE SOURCES</div>
-          <h2>10+ Sources.<br>Every Field Attributed.<br>Nothing Hidden.</h2>
-          <p>TheTradeSpy.ai draws from federal registrations, corporate filings, environmental records, international certifications, trade data, political disclosures, and AI-powered document analysis. No single source is sufficient. The platform uses all of them.</p>
+          <h2>13+ Sources.<br>Every Field Attributed.<br>Nothing Hidden.</h2>
+          <p>TradeSpy.ai draws from federal registrations, corporate filings, environmental records, international certifications, trade data, political disclosures, and AI-powered document analysis. No single source is sufficient. The platform uses all of them.</p>
           <p style="margin-top:1rem">Every data point carries its source, its collection timestamp, and its confidence contribution. <span data-tooltip="// procurement officers can drill to field level">The evidence is not behind the score — it is the product.</span></p>
         </div>
         <div style="margin-top:2rem">
@@ -697,7 +671,7 @@
             <div class="arch-box"><div class="arch-label">LABEL INTELLIGENCE</div><div class="arch-sub">COO extracted from package images and SPL text — capturing what the FDA record doesn't show</div></div>
           </div>
           <div class="arch-note">
-            // 10 patents cover the core architectural primitives. The agent swarm is not a prototype. It is a patented production architecture operating on 149,000+ NDCs right now.
+            // 6 patents cover the core architectural primitives. The agent swarm is not a prototype. It is a patented production architecture operating on 29,000+ NDCs right now.
           </div>
         </div>
       </div>
@@ -711,12 +685,12 @@
         <div class="evidence-tag">◈ EXHIBIT E — CONTACT // SECURE CHANNEL</div>
         <h2>Request Platform Access</h2>
         <p style="font-size:0.9rem;color:var(--ink-2);margin-bottom:1.5rem;line-height:1.75">
-          TheTradeSpy.ai is available to federal agencies, hospital systems, GPOs, and pharmaceutical manufacturers on an invitation only basis. Platform access, API integration, and enterprise licensing available.
+          TradeSpy.ai is available to federal agencies, hospital systems, GPOs, and pharmaceutical manufacturers. Platform access, API integration, and enterprise licensing available.
         </p>
         <div class="contact-channels">
           <div class="contact-ch">
             <span class="ch-label">PLATFORM</span>
-            <span class="ch-value"><a href="https://thetradespy.ai">thetradespy.ai</a></span>
+            <span class="ch-value"><a href="https://tradespy.ai">tradespy.ai</a></span>
           </div>
           <div class="contact-ch">
             <span class="ch-label">EMAIL</span>
@@ -777,9 +751,9 @@
         <line x1="0" y1="20" x2="8" y2="20" stroke="#c8160a" stroke-width="1.5"/>
         <line x1="32" y1="20" x2="40" y2="20" stroke="#c8160a" stroke-width="1.5"/>
       </svg>
-      <span style="font-family:var(--mono);font-size:1rem;font-weight:600;color:rgba(255,255,255,0.7)">TheTrade<span style="color:#c8160a">Spy</span>.ai</span>
+      <span style="font-family:var(--mono);font-size:1rem;font-weight:600;color:rgba(255,255,255,0.7)">Trade<span style="color:#c8160a">Spy</span>.ai</span>
     </div>
-    <span class="footer-mono">CASE FILE TS-2026-001 · © 2026 TheTradeSpy.ai · Powered by iRemedy Healthcare Companies, Inc. · All Rights Reserved · <span id="secret-stamp" style="cursor:crosshair;opacity:0.3;user-select:none;" title="...">⊕</span></span>
+    <span class="footer-mono">CASE FILE TS-2026-001 · © 2026 TradeSpy.ai · Powered by iRemedy Healthcare Companies, Inc. · All Rights Reserved · <span id="secret-stamp" style="cursor:crosshair;opacity:0.3;user-select:none;" title="...">⊕</span></span>
     <ul class="footer-links">
       <li><a href="#capabilities-sheet">Capabilities</a></li>
       <li><a href="#diagram">Architecture</a></li>
