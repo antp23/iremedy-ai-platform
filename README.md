@@ -81,10 +81,7 @@ TheTradeSpy.ai is built on a foundation of 10 granted U.S. patents co-invented b
 ## Contact
 
 **Platform:** thetradespy.ai  
-**Email:** tony@iremedy.com  
-**HQ:** 7118 S. Kanner Hwy, Stuart FL  
-**NAICS:** 541519 · 541690 · 611430  
-**Type:** Small Business · For-Profit Corporation  
+**Email:** request@TheTradeSpy.ai  
 
 ---
 
