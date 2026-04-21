@@ -72,7 +72,7 @@ body::before {
 }
 
 .masthead-center { text-align: center; flex: 1; padding: 0 2rem; }
-.masthead-center img { height: 40px; filter: invert(1) brightness(0); }
+.masthead-center img { height: 40px; }
 .masthead-tagline { font-family: var(--mono); font-size: 0.6rem; color: var(--ink-3); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 0.4rem; }
 
 .masthead-right { text-align: right; }
@@ -428,7 +428,7 @@ footer {
   border-top: 3px solid var(--ink);
 }
 
-footer img { height: 24px; filter: invert(1) brightness(0); }
+footer img { height: 24px; }
 .footer-mono { font-family: var(--mono); font-size: 0.62rem; color: var(--ink-3); }
 .footer-links { display: flex; gap: 2rem; list-style: none; }
 .footer-links a { font-family: var(--mono); font-size: 0.65rem; color: var(--ink-3); text-decoration: none; letter-spacing: 0.05em; }
