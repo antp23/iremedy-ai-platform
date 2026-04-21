@@ -271,7 +271,7 @@ body::before {
 
 .cap-row {
   display: grid;
-  grid-template-columns: 3rem 1fr 1fr auto;
+  grid-template-columns: 3rem 14rem 1fr auto;
   gap: 2rem; align-items: start;
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--rule);
